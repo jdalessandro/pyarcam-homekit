@@ -1,0 +1,3 @@
+HAP-python>=4.9.0
+# pyarcam: GitHub only — https://github.com/jdalessandro/pyarcam
+pyarcam @ git+https://github.com/jdalessandro/pyarcam.git@main

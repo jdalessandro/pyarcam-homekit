@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyarcam-homekit"
+version = "0.1.0"
+description = "Arcam SA10/SA20 amplifier exposed to Apple HomeKit (HAP-python, pyarcam)"
+requires-python = ">=3.10"
+dependencies = [
+  "HAP-python>=4.9.0",
+  # pyarcam is not on PyPI; install from GitHub (see https://github.com/jdalessandro/pyarcam).
+  "pyarcam @ git+https://github.com/jdalessandro/pyarcam.git@main",
+]
+
+[project.scripts]
+pyarcam-homekit = "pyarcam_homekit.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
