@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local Arcam bridge config (copy from arcam.example.json)
+/arcam.json
+
+# Local reference clones used during development
+/_ref_*
