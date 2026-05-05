@@ -1,0 +1,24 @@
+# Deploy: sudo cp systemd/pyarcam-homekit.service /etc/systemd/system/
+#         sudo systemctl daemon-reload && sudo systemctl enable --now pyarcam-homekit
+#
+# On the same machine as smartrent-devices-homekit (HAP default 51827), pick another port:
+#   echo 'ARCAM_HAP_PORT=51828' | sudo tee /etc/default/pyarcam-homekit
+
+[Unit]
+Description=Arcam amplifier bridged to Apple HomeKit
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jared
+Group=jared
+WorkingDirectory=/home/jared/pyarcam-homekit
+# Optional: ARCAM_HAP_PORT, ARCAM_HAP_PERSIST, ARCAM_LOG_LEVEL, ...
+EnvironmentFile=-/etc/default/pyarcam-homekit
+ExecStart=/home/jared/pyarcam-homekit/.venv/bin/python -m pyarcam_homekit
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
