@@ -93,6 +93,11 @@ class ArcamAmpAccessory(Accessory):
             inp.configure_char("Identifier", value=int(src.value))
             self._register_linked(tv, inp)
 
+        # HAP accessory JSON must list every service object, not only Television's
+        # "linked" IIDs — otherwise HomeKit often exposes Active (power) only.
+        for child in tv.linked_services:
+            self.add_service(child)
+
         self.set_primary_service(tv)
         self._serv_tv = tv
         self._serv_sp = sp
